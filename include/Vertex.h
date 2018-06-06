@@ -2,6 +2,8 @@
 #define _VERTEX_H_
 
 #include <vector>
+#include <iostream>
+#include <string>
 
 class Vertex
 {
@@ -131,6 +133,13 @@ class Vertex
 	 * @return     True if adj, False otherwise.
 	 */
 	bool isAdj ( Vertex vertex );
+
+	/**
+	 * @brief      Returns a string representation of the object.
+	 *
+	 * @return     String representation of the object.
+	 */
+	std::string toString(); 
 
 
 };

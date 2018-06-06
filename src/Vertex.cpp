@@ -15,8 +15,9 @@
  */
 Vertex::Vertex ( int id )
 {
-	id = id;
-	degree = 0;
+	this->id = id;
+	this->degree = 0;
+	adjList = std::vector<Vertex>();
 }
 
 /**
@@ -26,7 +27,7 @@ Vertex::Vertex ( int id )
  */
 unsigned int Vertex::getDegree ()
 {
-	return adjList.size();
+	return this->adjList.size();
 }
 
 /**
@@ -36,7 +37,7 @@ unsigned int Vertex::getDegree ()
  */
 int Vertex::getId ()
 {
-	return id;
+	return this->id;
 }
 
 /**
@@ -46,6 +47,7 @@ int Vertex::getId ()
  */
 std::vector<Vertex> Vertex::getAdjList ()
 {
+	std::cout << adjList.size() << std::endl;
 	return adjList;
 }
 
@@ -56,7 +58,7 @@ std::vector<Vertex> Vertex::getAdjList ()
  */
 void Vertex::setId ( int newId )
 {
-	id = newId;
+	this->id = newId;
 }
 
 /**
@@ -66,7 +68,7 @@ void Vertex::setId ( int newId )
  */	
 void Vertex::setAdjList ( std::vector<Vertex> newAdjList )
 {
-	adjList = newAdjList;
+	this->adjList = newAdjList;
 }
 
 /**
@@ -107,3 +109,25 @@ bool Vertex::isAdj ( Vertex vertex )
 
 	return false;
 }
+
+/**
+ * @brief      Returns a string representation of the object.
+ *
+ * @return     String representation of the object.
+ */
+std::string Vertex::toString()
+{
+	std::string value = "( ";
+	value += std::to_string( this->getId() ) + " ){ ";
+	for (unsigned int i = 0; i < adjList.size(); i++)
+		value += std::to_string( adjList[i].getId() ) + " ";
+	value += "}\n";
+	
+	return value;
+
+} 
+
+
+
+
+
