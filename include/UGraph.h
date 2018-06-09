@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include "Vertex.h"
+#include "Edge.h"
 
 class UGraph
 {
@@ -19,6 +20,7 @@ class UGraph
 
 	// Attributes
 	std::vector<Vertex> vertices; // vertices in a graph
+	std::vector<Edge> edges;
 
 	public:
 
@@ -46,6 +48,21 @@ class UGraph
 	 * @param[in]  sink    The sink
 	 */
 	void addEdge (int source, int sink);
+
+	/**
+	 * @brief      Adds an edge.
+	 *
+	 * @param[in]  source  The source
+	 */
+	void addEdge (Vertex source, Vertex sink);
+
+	/**
+	 * @brief      Adds an edge.
+	 *
+	 * @param[in]  edge  The edge
+	 */
+	void addEdge (Edge edge);
+
 	
 	/**
 	 * @brief      Adds a vertex.
@@ -53,6 +70,26 @@ class UGraph
 	 * @param[in]  v    The vertex
 	 */
 	void addVertex (Vertex v);
+
+	/**
+	 * @brief      Removes an edge.
+	 *
+	 * @param[in]  source  The source
+	 * @param[in]  sink    The sink
+	 *
+	 * @return     True if it could remove, false otherwise
+	 */
+	bool removeEdge ( Edge edge );
+
+
+	/**
+	 * @brief      Removes a vertex.
+	 *
+	 * @param[in]  idVertex  vertex identifier
+	 *
+	 * @return     True if it could remove, false otherwise
+	 */
+	bool removeVertex ( int idVertex );
 
 	/**
 	 * @brief      Returns a string representation of the object.
@@ -77,7 +114,7 @@ class UGraph
 	 *
 	 * @return     The vertex or a null vertex if it is not found.
 	 */
-	Vertex getVertex ( int id );
+	Vertex & getVertex ( int id );
 
 	/**
 	 * @brief      Gets the vertices.

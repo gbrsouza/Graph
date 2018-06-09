@@ -99,9 +99,14 @@ void Vertex::removeEdge ( Vertex vertex )
 {
 	if ( adjList.empty() ) return;
 
-	for (auto i = adjList.begin(); i != adjList.end(); ++i )
-		if ( *i == vertex )
-			adjList.erase(i);
+	for (auto it = adjList.begin(); it != adjList.end(); ++it )
+	{
+		if ( *it == vertex )
+		{
+			adjList.erase(it, it+1);
+			break;
+		}
+	}
 }
 
 /**
@@ -113,7 +118,7 @@ void Vertex::removeEdge ( Vertex vertex )
  */
 bool Vertex::isAdj ( Vertex vertex )
 {
-	for ( unsigned int i=0; i < this->getDegree(); i++ )
+	for ( int i=0; i < this->getDegree(); i++ )
 		if ( this->adjList[i] == vertex ) return true;
 
 	return false;

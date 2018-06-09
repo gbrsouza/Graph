@@ -106,3 +106,17 @@ void Edge::setSink ( Vertex sink )
 {
 	this->sink = sink;
 }
+
+/**
+ * @brief      Returns a string representation of the object.
+ *
+ * @return     String representation of the object.
+ */
+std::string Edge::toString ()
+{
+	std::string value = "";
+	value += "{ " + std::to_string(source.getId()) + ", ";
+	value += std::to_string(sink.getId()) + " }\n";
+
+	return value;
+}

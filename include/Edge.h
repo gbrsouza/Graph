@@ -10,6 +10,7 @@
 #define _EDGE_H_
 
 #include "Vertex.h"
+#include <string>
 
 class Edge 
 {
@@ -120,6 +121,13 @@ class Edge
 	 * @param[in]  sink  The sink
 	 */
 	void setSink ( Vertex sink );
+
+	/**
+	 * @brief      Returns a string representation of the object.
+	 *
+	 * @return     String representation of the object.
+	 */
+	std::string toString ();
 
 };
 

@@ -39,16 +39,38 @@ void UGraph::addEdge (int source, int sink)
 	auto vSource = getVertex(source);
 	auto vSink   = getVertex(sink);
 	
-	if ( (vSource != 0) and ( vSink != 0) )
+	if ( (vSource.getDegree() != -1) and ( vSink.getDegree() != -1) )
 	{
 		for ( unsigned int i=0; i < vertices.size(); i++)
 		{
 			if (vertices[i].getId() == source )
-				vertices[i].addEdge(vSource);
-			else if (vertices[i].getId() == sink)
 				vertices[i].addEdge(vSink);
+			else if (vertices[i].getId() == sink)
+				vertices[i].addEdge(vSource);
 		}
+
+		edges.push_back( Edge(source, sink) );
 	}
+}
+
+/**
+ * @brief      Adds an edge.
+ *
+ * @param[in]  source  The source
+ */
+void UGraph::addEdge (Vertex source, Vertex sink)
+{
+	this->addEdge(source.getId(), sink.getId());
+}
+
+/**
+ * @brief      Adds an edge.
+ *
+ * @param[in]  edge  The edge
+ */
+void UGraph::addEdge (Edge edge)
+{
+	this->addEdge(edge.getSource(), edge.getSink());
 }
 
 /**
@@ -62,6 +84,57 @@ void UGraph::addVertex (Vertex v)
 }
 
 /**
+ * @brief      Removes an edge.
+ *
+ * @param[in]  source  The source identifier
+ * @param[in]  sink    The sink identifier
+ *
+ * @return     True if it could remove, false otherwise
+ */
+bool UGraph::removeEdge ( Edge edge )
+{
+	if ( edges.empty() ) return false;
+
+	for ( auto it = edges.begin(); it != edges.end(); ++it )
+	{
+		if ((it->getSource() == edge.getSource() ) and (it->getSink() == edge.getSink()) ) 
+		{
+			edges.erase(it, it+1);
+			
+			// remove vertex adjacency
+			this->getVertex(edge.getSource().getId()).removeEdge( edge.getSink() );
+			this->getVertex(edge.getSink().getId()).removeEdge( edge.getSource() );
+
+			return true;
+		} else if ((it->getSink() == edge.getSource()) and (it->getSource() == edge.getSink()))
+		{
+			edges.erase(it, it+1);
+
+			// remove vertex adjacency
+			getVertex(edge.getSource().getId()).removeEdge( edge.getSource() );
+			getVertex(edge.getSink().getId()).removeEdge( edge.getSink() );
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+/**
+ * @brief      Removes a vertex.
+ *
+ * @param[in]  idVertex  vertex identifier
+ *
+ * @return     True if it could remove, false otherwise
+ */
+bool UGraph::removeVertex ( int idVertex )
+{
+	return true;
+}
+
+/**
  * @brief      Returns a string representation of the object.
  *
  * @return     String representation of the object.
@@ -71,6 +144,12 @@ std::string UGraph::toString ()
 	std::string value = "";
 	for (unsigned int i=0; i < vertices.size(); i++)
 		value += vertices[i].toString();
+
+	value += "------------------------------------";
+	value += "Edges list\n";
+
+	for (unsigned int i=0; i < edges.size(); i++)
+		value+= edges[i].toString();
 	
 	return value;
 }
@@ -97,7 +176,7 @@ bool UGraph::isVertexContained ( int idVertex )
  *
  * @return     The vertex or a null vertex if it is not found.
  */
-Vertex UGraph::getVertex ( int id )
+Vertex & UGraph::getVertex ( int id )
 {
 	for ( int i=0; i < this->getGraphOrder(); i++ )
 		if ( vertices[i].getId() == id ) return vertices[i];
