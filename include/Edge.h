@@ -45,6 +45,15 @@ class Edge
 	Edge ( Vertex source, Vertex sink, int weight );
 
 	/**
+	 * @brief      Constructs the object.
+	 *
+	 * @param[in]  idSource  The identifier source
+	 * @param[in]  idSink    The identifier sink
+	 * @param[in]  weight    The weight
+	 */
+	Edge ( int idSource, int idSink, int weight );
+
+	/**
 	 * @brief      Destroys the object.
 	 */
 	~Edge () = default;

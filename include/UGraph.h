@@ -35,6 +35,8 @@ class UGraph
 	 * @param[in]  numOfVertices  The number of vertices
 	 */
 	UGraph ( int numOfVertices );
+
+	UGraph ( std::vector<Vertex> vertices, std::vector<Edge> edges );
 	
 	/**
 	 * @brief      Destroys the object.
@@ -46,15 +48,17 @@ class UGraph
 	 *
 	 * @param[in]  source  The source
 	 * @param[in]  sink    The sink
+	 * @param[in]  weight  The edge weight
 	 */
-	void addEdge (int source, int sink);
+	void addEdge (int source, int sink, int weight);
 
 	/**
 	 * @brief      Adds an edge.
 	 *
-	 * @param[in]  source  The source
+	 * @param[in]  source  The edge source
+	 * @param[in]  sink    The edge weight
 	 */
-	void addEdge (Vertex source, Vertex sink);
+	void addEdge (Vertex source, Vertex sink, int weight);
 
 	/**
 	 * @brief      Adds an edge.

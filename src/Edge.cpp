@@ -46,6 +46,20 @@ Edge::Edge ( Vertex source, Vertex sink, int weight )
 	this->weight = weight;
 }
 
+/**
+ * @brief      Constructs the object.
+ *
+ * @param[in]  idSource  The identifier source
+ * @param[in]  idSink    The identifier sink
+ * @param[in]  weight    The weight
+ */
+Edge::Edge ( int idSource, int idSink, int weight )
+{
+	this->source = Vertex(idSource);
+	this->sink = Vertex(idSink);
+	this->weight = weight;
+}
+
 
 /**
  * @brief      Gets the weight.
@@ -115,8 +129,9 @@ void Edge::setSink ( Vertex sink )
 std::string Edge::toString ()
 {
 	std::string value = "";
-	value += "{ " + std::to_string(source.getId()) + ", ";
-	value += std::to_string(sink.getId()) + " }\n";
+	value += "{ <" + std::to_string(source.getId()) + ", ";
+	value += std::to_string(sink.getId()) + "> [";
+	value += std::to_string(this->weight) + "] }\n";
 
 	return value;
 }

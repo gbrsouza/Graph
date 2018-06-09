@@ -29,12 +29,27 @@ UGraph::UGraph ( int numOfVertices )
 }
 
 /**
+ * @brief      Constructs the object.
+ *
+ * @param[in]  vertices  The vertices
+ * @param[in]  edges     The edges
+ */
+UGraph::UGraph ( std::vector<Vertex> vertices, std::vector<Edge> edges )
+{
+	this->vertices = vertices;
+
+	for (unsigned int i=0; i < edges.size(); i++)
+		this->addEdge(edges[i]);
+}
+
+/**
  * @brief      Adds an edge.
  *
  * @param[in]  source  The source
  * @param[in]  sink    The sink
+ * @param[in]  weight  The weight
  */
-void UGraph::addEdge (int source, int sink)
+void UGraph::addEdge (int source, int sink, int weight)
 {
 	auto vSource = getVertex(source);
 	auto vSink   = getVertex(sink);
@@ -49,18 +64,19 @@ void UGraph::addEdge (int source, int sink)
 				vertices[i].addEdge(vSource);
 		}
 
-		edges.push_back( Edge(source, sink) );
+		edges.push_back( Edge(source, sink, weight) );
 	}
 }
 
 /**
  * @brief      Adds an edge.
  *
- * @param[in]  source  The source
+ * @param[in]  source  The edge source
+ * @param[in]  sink    The edge weight
  */
-void UGraph::addEdge (Vertex source, Vertex sink)
+void UGraph::addEdge (Vertex source, Vertex sink, int weight)
 {
-	this->addEdge(source.getId(), sink.getId());
+	this->addEdge(source.getId(), sink.getId(), weight);
 }
 
 /**
@@ -70,7 +86,7 @@ void UGraph::addEdge (Vertex source, Vertex sink)
  */
 void UGraph::addEdge (Edge edge)
 {
-	this->addEdge(edge.getSource(), edge.getSink());
+	this->addEdge(edge.getSource(), edge.getSink(), edge.getWeight());
 }
 
 /**
@@ -175,7 +191,7 @@ std::string UGraph::toString ()
 	for (unsigned int i=0; i < vertices.size(); i++)
 		value += vertices[i].toString();
 
-	value += "------------------------------------";
+	value += "------------------------------------\n";
 	value += "Edges list\n";
 
 	for (unsigned int i=0; i < edges.size(); i++)

@@ -1,36 +1,15 @@
 #include <iostream>
 #include <cassert>
 #include "UGraph.h"
+#include <vector>
 
 int main ()
 {
-	/// create a null graph
-	UGraph myGraph = UGraph();
-	
-	// create two vertices
-	Vertex v1 = Vertex(1);
-	Vertex v2 = Vertex(2);
+	std::vector<Vertex> vertices = {1,2,3,4};
+	std::vector<Edge> edges = {{1,2,6}, {2,3,2}, {2,4,8}, {3,4,2}};
 
-	// add vertices in a graph
-	myGraph.addVertex(v1);
-	myGraph.addVertex(v2);
-
-	// create edge
-	Edge edge1 = Edge(v1, v2);
-
-	std::cout << "BEFORE\n";
-	std::cout << myGraph.toString();
-
-	myGraph.addEdge( edge1 );
-
-	std::cout << "AFTER\n";
-	std::cout << myGraph.toString();
-
-	// assert(myGraph.removeEdge (edge1));
-	assert(myGraph.removeVertex (v1));
-
-	std::cout << "REMOVED\n";
-	std::cout << myGraph.toString();
+	UGraph graph = UGraph(vertices, edges);
+	std::cout << graph.toString();
 
 	return 0;
 }
