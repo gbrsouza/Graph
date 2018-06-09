@@ -16,8 +16,12 @@ class Vertex
 	unsigned int degree; // vertex degree
 	std::vector<Vertex> adjList; // vertex adjacency vector 
 
-
 	public:
+
+	/**
+	 * @brief      Constructs the object. Create a null graph
+	 */
+	Vertex ();
 
 	/**
 	 * @brief      Basic Construct
@@ -81,7 +85,7 @@ class Vertex
 	 *
 	 * @return     The degree.
 	 */
-	unsigned int getDegree ();
+	int getDegree ();
 
 	/**
 	 * @brief      Gets the identifier.

@@ -10,6 +10,15 @@
 
 /**
  * @brief      Constructs the object.
+ */
+UGraph::UGraph ()
+{
+	Vertex aux = Vertex();
+	this->vertices.push_back( aux );
+}
+
+/**
+ * @brief      Constructs the object.
  *
  * @param[in]  numOfVertices  The number of vertices
  */
@@ -29,6 +38,7 @@ void UGraph::addEdge (int source, int sink)
 {
 	auto vSource = getVertex(source);
 	auto vSink   = getVertex(sink);
+	
 	if ( (vSource != 0) and ( vSink != 0) )
 	{
 		for ( unsigned int i=0; i < vertices.size(); i++)
@@ -66,17 +76,34 @@ std::string UGraph::toString ()
 }
 
 /**
+ * @brief      Determines if vertex contained in this graph.
+ *
+ * @param[in]  idVertex  The vertex identifier
+ *
+ * @return     True if vertex contained, False otherwise.
+ */
+bool UGraph::isVertexContained ( int idVertex )
+{
+	for ( auto i = this->vertices.begin(); i != this->vertices.end(); ++i)
+		if ( i->getId() == idVertex ) return true;
+	return false;
+}
+
+
+/**
  * @brief      Gets the vertex.
  *
  * @param[in]  id    The identifier
  *
- * @return     The vertex, 0 if it is not found.
+ * @return     The vertex or a null vertex if it is not found.
  */
 Vertex UGraph::getVertex ( int id )
 {
-	for ( auto i = vertices.begin(); i != vertices.end(); ++i)
-		if ( i->getId() == id ) return *i;
-	return 0;
+	for ( int i=0; i < this->getGraphOrder(); i++ )
+		if ( vertices[i].getId() == id ) return vertices[i];
+
+	Vertex nullVertex = Vertex();
+	return nullVertex;
 }
 
 /**
@@ -86,7 +113,49 @@ Vertex UGraph::getVertex ( int id )
  */
 std::vector<Vertex> UGraph::getVertices ()
 {
-	return vertices;
+	return this->vertices;
 }
 
+/**
+ * @brief      Gets the graph order.
+ *
+ * @return     The graph order.
+ */
+int UGraph::getGraphOrder ()
+{
+	return this->vertices.size();
+}
 
+/**
+ * @brief      Gets the vertex-induced subgraph.
+ *
+ * @param[in]  vertices        A vector containing a set of vertices
+ * @param      originalGraph   The original graph
+ *
+ * @return     The vertex induced subgraph corresponding a set
+ *             of vertices. 
+ */
+UGraph UGraph::getVertexInducedSubgraph ( 
+	std::vector<Vertex> vertices )
+{
+	UGraph vertexInducedSubgraph = UGraph();
+
+	// add vertix in a new graph
+	for ( unsigned int i=0; i < vertices.size(); i++)
+		vertexInducedSubgraph.addVertex( vertices[i] );
+
+	// add coresponding edges
+	std::vector<Vertex> adjList;
+	for ( unsigned int i=0; i < vertices.size(); i++)
+	{
+		adjList = vertices[i].getAdjList();
+		for ( unsigned int j=0; j < adjList.size(); j++ )
+		{
+			if ( vertexInducedSubgraph.getVertex( adjList[j].getId() ).getDegree() != -1 )
+				vertexInducedSubgraph.getVertex( vertices[i].getId() ).addEdge(adjList[j]);
+		}
+	}
+
+	return vertexInducedSubgraph;
+
+}

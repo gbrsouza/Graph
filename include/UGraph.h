@@ -1,3 +1,11 @@
+/**
+ * Class for Graph representation
+ * 
+ * author     Gabriel Araújo de Souza
+ * e_mail     gabriel_feg@hotmail.com
+ * date       Jun 2018 
+ */
+
 #ifndef _UGRAPH_H_
 #define _GRAPH_H_
 
@@ -54,11 +62,20 @@ class UGraph
 	std::string toString ();
 
 	/**
+	 * @brief      Determines if vertex contained in this graph.
+	 *
+	 * @param[in]  idVertex  The vertex identifier
+	 *
+	 * @return     True if vertex contained, False otherwise.
+	 */
+	bool isVertexContained ( int idVertex );
+
+	/**
 	 * @brief      Gets the vertex.
 	 *
 	 * @param[in]  id    The identifier
 	 *
-	 * @return     The vertex, 0 if it is not found.
+	 * @return     The vertex or a null vertex if it is not found.
 	 */
 	Vertex getVertex ( int id );
 
@@ -68,6 +85,25 @@ class UGraph
 	 * @return     The vertices.
 	 */
 	std::vector<Vertex> getVertices ();
+
+	/**
+	 * @brief      Gets the graph order.
+	 *
+	 * @return     The graph order.
+	 */
+	int getGraphOrder ();
+	
+	/**
+	 * @brief      Gets the vertex-induced subgraph.
+	 *
+	 * @param[in]  vertices        A vector containing a set of vertices
+	 * @param      originalGraph   The original graph
+	 *
+	 * @return     The vertex induced subgraph corresponding a set
+	 *             of vertices. 
+	 */
+	UGraph getVertexInducedSubgraph ( std::vector<Vertex> vertices );
+	
 
 };
 

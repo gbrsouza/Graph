@@ -9,6 +9,15 @@
 #include "Vertex.h"
 
 /**
+ * @brief      Constructs the object. Create a null graph
+ */
+Vertex::Vertex ()
+{
+	id = -1;
+	degree = -1;
+}
+
+/**
  * @brief      Basic Construct
  *
  * @param[in]  id    The vertex identifier
@@ -25,9 +34,9 @@ Vertex::Vertex ( int id )
  *
  * @return     The degree.
  */
-unsigned int Vertex::getDegree ()
+int Vertex::getDegree ()
 {
-	return this->adjList.size();
+	return degree;
 }
 
 /**
@@ -47,8 +56,7 @@ int Vertex::getId ()
  */
 std::vector<Vertex> Vertex::getAdjList ()
 {
-	std::cout << adjList.size() << std::endl;
-	return adjList;
+	return this->adjList;
 }
 
 /**
@@ -79,6 +87,7 @@ void Vertex::setAdjList ( std::vector<Vertex> newAdjList )
 void Vertex::addEdge ( Vertex vertex )
 {
 	adjList.push_back( vertex );
+	degree++;
 }
 
 /**
@@ -122,7 +131,7 @@ std::string Vertex::toString()
 	for (unsigned int i = 0; i < adjList.size(); i++)
 		value += std::to_string( adjList[i].getId() ) + " ";
 	value += "}\n";
-	
+
 	return value;
 
 } 
