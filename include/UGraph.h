@@ -72,6 +72,15 @@ class UGraph
 	void addVertex (Vertex v);
 
 	/**
+	 * @brief      Removes a vertex.
+	 *
+	 * @param[in]  vertex  The vertex
+	 *
+	 * @return     True if it could remove, false otherwise
+	 */
+	bool removeVertex ( Vertex vertex );
+
+	/**
 	 * @brief      Removes an edge.
 	 *
 	 * @param[in]  source  The source
@@ -140,7 +149,6 @@ class UGraph
 	 *             of vertices. 
 	 */
 	UGraph getVertexInducedSubgraph ( std::vector<Vertex> vertices );
-	
 
 };
 

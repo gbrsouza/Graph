@@ -131,7 +131,37 @@ bool UGraph::removeEdge ( Edge edge )
  */
 bool UGraph::removeVertex ( int idVertex )
 {
-	return true;
+	for ( auto it = vertices.begin(); it != vertices.end(); it++)
+	{
+		if ( it->getId() == idVertex)
+		{
+			vertices.erase(it, it+1);
+
+			for (unsigned int i = 0; i < edges.size(); i++)
+			{
+				if ( (edges[i].getSource().getId() == idVertex) or 
+				     (edges[i].getSink().getId() == idVertex) )
+				{
+					this->removeEdge(edges[i]);
+				}
+			}
+
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * @brief      Removes a vertex.
+ *
+ * @param[in]  vertex  The vertex
+ *
+ * @return     True if it could remove, false otherwise
+ */
+bool UGraph::removeVertex ( Vertex vertex )
+{
+	return this->removeVertex(vertex.getId());
 }
 
 /**
@@ -181,8 +211,8 @@ Vertex & UGraph::getVertex ( int id )
 	for ( int i=0; i < this->getGraphOrder(); i++ )
 		if ( vertices[i].getId() == id ) return vertices[i];
 
-	Vertex nullVertex = Vertex();
-	return nullVertex;
+	static Vertex nullVertex = Vertex();
+	return (nullVertex);
 }
 
 /**

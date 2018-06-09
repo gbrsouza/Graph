@@ -26,7 +26,8 @@ int main ()
 	std::cout << "AFTER\n";
 	std::cout << myGraph.toString();
 
-	assert(myGraph.removeEdge (edge1));
+	// assert(myGraph.removeEdge (edge1));
+	assert(myGraph.removeVertex (v1));
 
 	std::cout << "REMOVED\n";
 	std::cout << myGraph.toString();
