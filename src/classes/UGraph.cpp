@@ -306,3 +306,47 @@ std::vector<Vertex> UGraph::getAdjList ( Vertex vertex )
 
 	return adjList;
 }
+
+/**
+ * @brief      Gets the edge weight.
+ *
+ * @param[in]  source  The source
+ * @param[in]  sink    The sink
+ *
+ * @return     The edge weight, -1 if not found.
+ */
+int UGraph::getEdgeWeight ( Vertex source, Vertex sink )
+{
+	for (unsigned int i=0; i < this->edges.size(); i++)
+	{
+		if ( (edges[i].getSource().getId() == source.getId() and
+		      edges[i].getSink().getId() == sink.getId()) or
+		     (edges[i].getSource().getId() == sink.getId() and
+		      edges[i].getSink().getId() == source.getId()) )
+		{
+			return edges[i].getWeight();
+		}
+	}
+	return -1;
+}
+
+/**
+ * @brief      Returns a string representation of the object for 
+ *             visualization of Dijkstra's algorithm .
+ *
+ * @return     String representation of the object.
+ */
+std::string UGraph::toStringPosDijkstra ()
+{
+	std::string value = "(Vertice)[ Rot | value ]\n";
+	for (unsigned int i=0; i < vertices.size(); i++)
+	{
+		value += "(";
+		value += vertices[i].getId() + ")[ ";
+		value += vertices[i].getLabeledBy() + " | ";
+		value += vertices[i].getPathWeight() + " ]\n";
+	}
+	
+	return value;
+}
+

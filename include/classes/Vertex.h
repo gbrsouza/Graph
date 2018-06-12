@@ -17,7 +17,7 @@ class Vertex
 	std::vector<Vertex> adjList; // vertex adjacency vector
 	bool mark = false; // auxiliary for DFS  
 	int labeledBy = -1; // auxiliary for Dijkstra
-	int pathWeight = -1; // auxiliary for Dijkstra
+	int pathWeight = 999999999; // auxiliary for Dijkstra
 
 	public:
 
@@ -50,7 +50,9 @@ class Vertex
 		id = rhs.id;
 		degree = rhs.degree;
 		adjList = rhs.adjList;
-
+		labeledBy = rhs.labeledBy;
+		pathWeight = rhs.pathWeight;
+		
 		return *this;
 	}
 
