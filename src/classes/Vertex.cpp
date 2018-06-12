@@ -161,6 +161,45 @@ void Vertex::setMark ( bool mark )
 	this->mark = mark;
 }
 
+/**
+ * @brief      Gets the labeled by.
+ *
+ * @return     The labeled by.
+ */
+int Vertex::getLabeledBy ()
+{
+	return this->labeledBy;
+}
+
+/**
+ * @brief      Gets the path weight.
+ *
+ * @return     The path weight.
+ */
+int Vertex::getPathWeight ()
+{
+	return this->pathWeight;
+}
+
+/**
+ * @brief      Sets the labeled by.
+ *
+ * @param[in]  labeledBy  The labeled by
+ */
+void Vertex::setLabeledBy (int labeledBy)
+{
+	this->labeledBy = labeledBy;
+}
+
+/**
+ * @brief      Sets the path weight.
+ *
+ * @param[in]  pathWeight  The path weight
+ */
+void Vertex::setPathWeight (int pathWeight)
+{
+	this->pathWeight = pathWeight;
+}
 
 
 
