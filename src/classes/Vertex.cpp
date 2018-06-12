@@ -6,7 +6,7 @@
  * date       Jun 2018 
  */
 
-#include "Vertex.h"
+#include "classes/Vertex.h"
 
 /**
  * @brief      Constructs the object. Create a null graph
@@ -140,6 +140,27 @@ std::string Vertex::toString()
 	return value;
 
 } 
+
+/**
+ * @brief      Determines if mark.
+ *
+ * @return     True if mark, False otherwise.
+ */
+bool Vertex::isMark ()
+{
+	return this->mark;
+}
+
+/**
+ * @brief      Sets the mark.
+ *
+ * @param[in]  mark  The mark
+ */
+void Vertex::setMark ( bool mark )
+{
+	this->mark = mark;
+}
+
 
 
 

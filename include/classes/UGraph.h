@@ -36,6 +36,12 @@ class UGraph
 	 */
 	UGraph ( int numOfVertices );
 
+	/**
+	 * @brief      Constructs the object.
+	 *
+	 * @param[in]  vertices  The vertices
+	 * @param[in]  edges     The edges
+	 */
 	UGraph ( std::vector<Vertex> vertices, std::vector<Edge> edges );
 	
 	/**
@@ -153,6 +159,15 @@ class UGraph
 	 *             of vertices. 
 	 */
 	UGraph getVertexInducedSubgraph ( std::vector<Vertex> vertices );
+
+	/**
+	 * @brief      Gets the adj list.
+	 *
+	 * @param[in]  vertex  The vertex
+	 *
+	 * @return     The adj list.
+	 */
+	std::vector<Vertex> getAdjList ( Vertex vertex);
 
 };
 

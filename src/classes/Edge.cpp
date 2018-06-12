@@ -6,7 +6,7 @@
  * date       Jun 2018 
  */
 
-#include "Edge.h"
+#include "classes/Edge.h"
 
 
 /**

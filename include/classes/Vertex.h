@@ -14,7 +14,10 @@ class Vertex
 
 	int id; // vertex id
 	unsigned int degree; // vertex degree
-	std::vector<Vertex> adjList; // vertex adjacency vector 
+	std::vector<Vertex> adjList; // vertex adjacency vector
+	bool mark = false; // auxiliary for DFS  
+	int labeledBy = -1; // auxiliary for Dijkstra
+	int pathWeight = -1 // auxiliary for Dijkstra
 
 	public:
 
@@ -145,6 +148,47 @@ class Vertex
 	 */
 	std::string toString(); 
 
+	/**
+	 * @brief      Determines if mark.
+	 *
+	 * @return     True if mark, False otherwise.
+	 */
+	bool isMark ();
+
+	/**
+	 * @brief      Sets the mark.
+	 *
+	 * @param[in]  mark  The mark
+	 */
+	void setMark ( bool mark );
+
+	/**
+	 * @brief      Gets the labeled by.
+	 *
+	 * @return     The labeled by.
+	 */
+	int getLabeledBy ();
+
+	/**
+	 * @brief      Gets the path weight.
+	 *
+	 * @return     The path weight.
+	 */
+	int getPathWeight ();
+
+	/**
+	 * @brief      Sets the labeled by.
+	 *
+	 * @param[in]  labeledBy  The labeled by
+	 */
+	void setLabeledBy (int labeledBy);
+
+	/**
+	 * @brief      Sets the path weight.
+	 *
+	 * @param[in]  pathWeight  The path weight
+	 */
+	void setPathWeight (int pathWeight);
 
 };
 

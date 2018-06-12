@@ -6,7 +6,7 @@
  * date       Jun 2018 
  */
 
-#include "UGraph.h"
+#include "classes/UGraph.h"
 
 /**
  * @brief      Constructs the object.
@@ -282,5 +282,27 @@ UGraph UGraph::getVertexInducedSubgraph (
 	}
 
 	return vertexInducedSubgraph;
+}
 
+/**
+ * @brief      Gets the adj list.
+ *
+ * @param[in]  vertex  The vertex
+ *
+ * @return     The adj list.
+ */
+std::vector<Vertex> UGraph::getAdjList ( Vertex vertex )
+{
+	std::vector<Vertex> adjList;
+	for (unsigned int i=0; i < this->vertices.size(); i++)
+	{
+		auto aux = vertices[i].getAdjList();
+		for (unsigned int j=0; j < aux.size(); j++)
+		{
+			if ( aux[j].getId() == vertex.getId())
+				adjList.push_back(vertices[i]);
+		}
+	}
+
+	return adjList;
 }
