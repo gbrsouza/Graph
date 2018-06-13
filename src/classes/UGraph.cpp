@@ -36,6 +36,7 @@ UGraph::UGraph ( int numOfVertices )
  */
 UGraph::UGraph ( std::vector<Vertex> vertices, std::vector<Edge> edges )
 {
+	std::cout << "entrou\n";
 	this->vertices = vertices;
 
 	for (unsigned int i=0; i < edges.size(); i++)
@@ -236,9 +237,9 @@ Vertex & UGraph::getVertex ( int id )
  *
  * @return     The vertices.
  */
-std::vector<Vertex> UGraph::getVertices ()
+std::vector<Vertex> & UGraph::getVertices ()
 {
-	return this->vertices;
+	return vertices;
 }
 
 /**
@@ -306,3 +307,46 @@ std::vector<Vertex> UGraph::getAdjList ( Vertex vertex )
 
 	return adjList;
 }
+
+/**
+ * @brief      Gets the edge weight.
+ *
+ * @param[in]  source  The source
+ * @param[in]  sink    The sink
+ *
+ * @return     The edge weight, -1 if not found.
+ */
+int UGraph::getEdgeWeight ( Vertex source, Vertex sink )
+{
+	for (unsigned int i=0; i < this->edges.size(); i++)
+	{
+		if ( (edges[i].getSource().getId() == source.getId() and
+		      edges[i].getSink().getId() == sink.getId()) or
+		     (edges[i].getSource().getId() == sink.getId() and
+		      edges[i].getSink().getId() == source.getId()) )
+		{
+			return edges[i].getWeight();
+		}
+	}
+	return -1;
+}
+
+/**
+ * @brief      Returns a string representation of the object for 
+ *             visualization of Dijkstra's algorithm .
+ *
+ * @return     String representation of the object.
+ */
+void UGraph::toStringDijkstra ()
+{
+
+	std::cout << "(Vertice)[ Rot | value ]\n";
+	for (unsigned int it=0; it < vertices.size(); it++)
+	{
+		std::cout << "(";
+		std::cout << vertices[it].getId() << ")[ ";
+		std::cout << vertices[it].getLabeledBy() << " | ";
+		std::cout << vertices[it].getPathWeight() << " ]\n";
+	}
+}
+

@@ -5,7 +5,6 @@ int calcLowpt ( DFSTree &tree, int index )
 	auto node = tree.getNode(index);
 	int min = index;
 
-
 	for (unsigned int k=0; k < node.getEdgesReturn().size(); k++)
 		if ( node.getEdgesReturn()[k].getId() < min ) min = node.getEdgesReturn()[k].getId();
 

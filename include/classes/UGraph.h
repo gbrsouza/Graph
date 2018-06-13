@@ -7,7 +7,7 @@
  */
 
 #ifndef _UGRAPH_H_
-#define _GRAPH_H_
+#define _UGRAPH_H_
 
 #include <vector>
 #include <string>
@@ -48,6 +48,14 @@ class UGraph
 	 * @brief      Destroys the object.
 	 */
 	~UGraph () = default;
+
+	UGraph & operator=( const UGraph & rhs )
+	{
+		vertices = rhs.vertices;
+		edges = rhs.edges;
+		
+		return *this;
+	}
 
 	/**
 	 * @brief      Adds an edge.
@@ -140,7 +148,7 @@ class UGraph
 	 *
 	 * @return     The vertices.
 	 */
-	std::vector<Vertex> getVertices ();
+	std::vector<Vertex> & getVertices ();
 
 	/**
 	 * @brief      Gets the graph order.
@@ -168,6 +176,24 @@ class UGraph
 	 * @return     The adj list.
 	 */
 	std::vector<Vertex> getAdjList ( Vertex vertex);
+
+	/**
+	 * @brief      Gets the edge weight.
+	 *
+	 * @param[in]  source  The source
+	 * @param[in]  sink    The sink
+	 *
+	 * @return     The edge weight if not found.
+	 */
+	int getEdgeWeight ( Vertex source, Vertex sink );
+
+	/**
+	 * @brief      Returns a string representation of the object for 
+	 *             visualization of Dijkstra's algorithm .
+	 *
+	 * @return     String representation of the object.
+	 */
+	void toStringDijkstra ();
 
 };
 
