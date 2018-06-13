@@ -5,6 +5,6 @@
 
 void removeVertex (std::vector<Vertex> &freeSet, Vertex vertex);
 void updateReference (std::vector<Vertex> &freeSet, UGraph &graph);
-void dijkstra (UGraph &graph);
+UGraph dijkstra (UGraph graph);
 
 #endif

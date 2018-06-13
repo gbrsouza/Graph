@@ -2,6 +2,7 @@
 #include <cassert>
 #include "algorithms/tarjan.h"
 #include "algorithms/dijkstra.h"
+#include "classes/UGraph.h"
 #include <vector>
 
 int main ()
@@ -25,8 +26,9 @@ int main ()
 			std::cout << bridges[i].getId() << " ";
 	std::cout << std::endl;
 
-	dijkstra(graph);
-	graph.toStringPosDijkstra();
+	std::cout << "Rotulação por dijkstra\n";
+	graph = dijkstra(graph);
+	graph.toStringDijkstra();
 
 	return 0;
 }

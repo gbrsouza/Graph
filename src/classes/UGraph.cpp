@@ -238,7 +238,7 @@ Vertex & UGraph::getVertex ( int id )
  */
 std::vector<Vertex> UGraph::getVertices ()
 {
-	return this->vertices;
+	return vertices;
 }
 
 /**
@@ -336,17 +336,16 @@ int UGraph::getEdgeWeight ( Vertex source, Vertex sink )
  *
  * @return     String representation of the object.
  */
-std::string UGraph::toStringPosDijkstra ()
+void UGraph::toStringDijkstra ()
 {
-	std::string value = "(Vertice)[ Rot | value ]\n";
-	for (unsigned int i=0; i < vertices.size(); i++)
+
+	std::cout << "(Vertice)[ Rot | value ]\n";
+	for (unsigned int it=0; it < vertices.size(); it++)
 	{
-		value += "(";
-		value += vertices[i].getId() + ")[ ";
-		value += vertices[i].getLabeledBy() + " | ";
-		value += vertices[i].getPathWeight() + " ]\n";
+		std::cout << "(";
+		std::cout << vertices[it].getId() << ")[ ";
+		std::cout << vertices[it].getLabeledBy() << " | ";
+		std::cout << vertices[it].getPathWeight() << " ]\n";
 	}
-	
-	return value;
 }
 

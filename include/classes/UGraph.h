@@ -49,6 +49,14 @@ class UGraph
 	 */
 	~UGraph () = default;
 
+	UGraph & operator=( const UGraph & rhs )
+	{
+		vertices = rhs.vertices;
+		edges = rhs.edges;
+		
+		return *this;
+	}
+
 	/**
 	 * @brief      Adds an edge.
 	 *
@@ -185,7 +193,7 @@ class UGraph
 	 *
 	 * @return     String representation of the object.
 	 */
-	std::string toStringPosDijkstra ();
+	void toStringDijkstra ();
 
 };
 
