@@ -36,6 +36,7 @@ UGraph::UGraph ( int numOfVertices )
  */
 UGraph::UGraph ( std::vector<Vertex> vertices, std::vector<Edge> edges )
 {
+	std::cout << "entrou\n";
 	this->vertices = vertices;
 
 	for (unsigned int i=0; i < edges.size(); i++)
@@ -236,7 +237,7 @@ Vertex & UGraph::getVertex ( int id )
  *
  * @return     The vertices.
  */
-std::vector<Vertex> UGraph::getVertices ()
+std::vector<Vertex> & UGraph::getVertices ()
 {
 	return vertices;
 }

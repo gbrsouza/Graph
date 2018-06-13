@@ -52,7 +52,7 @@ class Vertex
 		adjList = rhs.adjList;
 		labeledBy = rhs.labeledBy;
 		pathWeight = rhs.pathWeight;
-		
+
 		return *this;
 	}
 
@@ -104,7 +104,7 @@ class Vertex
 	 *
 	 * @return     The adj vector.
 	 */
-	std::vector<Vertex> getAdjList ();
+	std::vector<Vertex> & getAdjList ();
 
 	/**
 	 * @brief      Sets the identifier.

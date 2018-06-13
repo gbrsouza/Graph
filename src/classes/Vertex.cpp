@@ -54,7 +54,7 @@ int Vertex::getId ()
  *
  * @return     The adj vector.
  */
-std::vector<Vertex> Vertex::getAdjList ()
+std::vector<Vertex> & Vertex::getAdjList ()
 {
 	return this->adjList;
 }

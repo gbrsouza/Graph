@@ -148,7 +148,7 @@ class UGraph
 	 *
 	 * @return     The vertices.
 	 */
-	std::vector<Vertex> getVertices ();
+	std::vector<Vertex> & getVertices ();
 
 	/**
 	 * @brief      Gets the graph order.
