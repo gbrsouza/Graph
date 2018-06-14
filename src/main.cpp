@@ -5,6 +5,8 @@
 #include "classes/UGraph.h"
 #include <vector>
 #include <fstream>
+#include "algorithms/reconnect.h"
+#include <fstream>
 
 int main ( )
 {
@@ -23,34 +25,26 @@ int main ( )
 	// 		 {2,5,3}, {5,4,5}, {5,6,4},
 	// 		 {6,4,9}, {6,7,5}};
 
-	double reader;
+	int reader;
 	bool signalT = true;
 	while (std::cin >> reader )
 	{
 		if (signalT)
 		{
-			for (double i=1; i <= reader; i++)
+			for (int i=1; i <= reader; i++)
 				vertices.push_back(Vertex(i));
 		}
 
 		int source;
 		int sink;
-		double peso=1;
-		double aux;
+		int peso;
 
 		if (signalT)
 			std::cin >> source;
 		else source = reader;
 		std::cin >> sink;
+		std::cin >> peso;
 		
-		for (int i=0; i < 3; i++)
-		{
-			std::cin >> aux;
-			peso *= aux;
-		} 		
-		
-		peso *= 100;
-		peso += 1;
 		edges.push_back(Edge(source, sink, (int)peso));
 		signalT = false;
 	}
@@ -66,15 +60,35 @@ int main ( )
 	
 	auto bridges = UGraphBridges(graph);
 
-	std::cout << "Bridges\n";
+	std::string strBridges = "Bridges\n";
 	for (unsigned int i =0; i < bridges.size(); i++)
-			std::cout << bridges[i].getId() << " ";
-	std::cout << std::endl;
+	{
+			strBridges += std::to_string(bridges[i].getId());
+			strBridges += " ";
+	}
+	strBridges += "\n";
+	std::cout << strBridges;
 
 	std::cout << "Rotulação por dijkstra\n";
 	graph = dijkstra(graph);
 	// std::cout << graph.toString();
-	graph.toStringDijkstra();
+	auto dijkstra = graph.toStringDijkstra();
+	std::cout << dijkstra;
+	std::ofstream file;
+	file.open("output.txt", std::ios::app);
+	if (file.is_open())
+	{
+	   file << graph.toString();
+	   file << "-----------------------------------\n DFS Tree \n";
+	   file << strBridges;
+	   file << "-----------------------------------\n Dijkstra \n";
+	   file << dijkstra;
+
+	}
+	else
+	   std::cout << "Erro ao abrir arquivo de texto.";
+
+	file.close();
 
 	return 0;
 }

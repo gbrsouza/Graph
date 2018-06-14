@@ -193,7 +193,7 @@ class UGraph
 	 *
 	 * @return     String representation of the object.
 	 */
-	void toStringDijkstra ();
+	std::string toStringDijkstra ();
 
 };
 

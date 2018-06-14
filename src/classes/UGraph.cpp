@@ -153,16 +153,19 @@ bool UGraph::removeVertex ( int idVertex )
 		if ( it->getId() == idVertex)
 		{
 			vertices.erase(it, it+1);
-
+			std::vector<Edge> edgesForRemove;
 			for (unsigned int i = 0; i < edges.size(); i++)
 			{
 				if ( (edges[i].getSource().getId() == idVertex) or 
 				     (edges[i].getSink().getId() == idVertex) )
 				{
-					this->removeEdge(edges[i]);
+					edgesForRemove.push_back(edges[i]);
 				}
 			}
 
+			for (unsigned int i = 0; i < edgesForRemove.size(); i++)
+				this->removeEdge(edgesForRemove[i]);
+							
 			return true;
 		}
 	}
@@ -188,12 +191,14 @@ bool UGraph::removeVertex ( Vertex vertex )
  */
 std::string UGraph::toString ()
 {
-	std::string value = "";
+	std::string value = "Graph\n";
+	value += "(Node){Adjacent Vertices}\n";
 	for (unsigned int i=0; i < vertices.size(); i++)
 		value += vertices[i].toString();
 
 	value += "------------------------------------\n";
 	value += "Edges list\n";
+	value += "<source, sink>[weight]\n";
 
 	for (unsigned int i=0; i < edges.size(); i++)
 		value+= edges[i].toString();
@@ -337,16 +342,18 @@ int UGraph::getEdgeWeight ( Vertex source, Vertex sink )
  *
  * @return     String representation of the object.
  */
-void UGraph::toStringDijkstra ()
+std::string UGraph::toStringDijkstra ()
 {
-
-	std::cout << "(Vertice)[ Rot | value ]\n";
+	std::string value = "";
+	value += "(Vertice)[ Rot | value ]\n";
 	for (unsigned int it=0; it < vertices.size(); it++)
 	{
-		std::cout << "(";
-		std::cout << vertices[it].getId() << ")[ ";
-		std::cout << vertices[it].getLabeledBy() << " | ";
-		std::cout << vertices[it].getPathWeight() << " ]\n";
+		value+= "(";
+		value+= std::to_string(vertices[it].getId()) + ")[ ";
+		value+= std::to_string(vertices[it].getLabeledBy()) + " | ";
+		value+= std::to_string(vertices[it].getPathWeight()) + " ]\n";
 	}
+
+	return value;
 }
 

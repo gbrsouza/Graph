@@ -65,7 +65,7 @@ class Vertex
 	 */
 	bool operator==( const Vertex & rhs )
 	{
-		if (id == rhs.id and degree == rhs.degree)
+		if (id == rhs.id)
 			return true;
 
 		return false;
